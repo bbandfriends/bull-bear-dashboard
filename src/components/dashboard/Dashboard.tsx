@@ -9,10 +9,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import WatchlistPage from '../watchlist/WatchlistPage';
 import { useAuth } from '@/contexts/AuthContext';
+import StockDetailsDialog from '../stocks/StockDetailsDialog';
 
 const Dashboard: React.FC = () => {
   const [selectedStock, setSelectedStock] = useState<StockData | null>(null);
   const [activeTab, setActiveTab] = useState<string>('market');
+  const [isStockDialogOpen, setIsStockDialogOpen] = useState(false);
   const { user } = useAuth();
   
   const { 
@@ -42,6 +44,11 @@ const Dashboard: React.FC = () => {
     }
   }, [stocks, selectedStock]);
   
+  const handleStockClick = (stock: StockData) => {
+    setSelectedStock(stock);
+    setIsStockDialogOpen(true);
+  };
+  
   if (stocksError || newsError) {
     return (
       <div className="flex items-center justify-center h-96">
@@ -67,7 +74,7 @@ const Dashboard: React.FC = () => {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {stocksLoading ? (
                 // Loading skeletons
-                Array(4).fill(0).map((_, index) => (
+                Array(6).fill(0).map((_, index) => (
                   <div key={index} className="rounded-lg border shadow">
                     <div className="p-4">
                       <div className="space-y-3">
@@ -87,6 +94,7 @@ const Dashboard: React.FC = () => {
                     key={stock.id} 
                     stock={stock} 
                     onClick={() => setSelectedStock(stock)}
+                    onAddToWatchlist={() => handleStockClick(stock)}
                   />
                 ))
               )}
@@ -131,6 +139,13 @@ const Dashboard: React.FC = () => {
               )}
             </div>
           </section>
+          
+          {/* Stock Details Dialog */}
+          <StockDetailsDialog
+            stock={selectedStock}
+            isOpen={isStockDialogOpen}
+            onOpenChange={setIsStockDialogOpen}
+          />
         </TabsContent>
         
         <TabsContent value="watchlist" className="pt-6">

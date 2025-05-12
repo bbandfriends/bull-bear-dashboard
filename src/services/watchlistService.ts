@@ -1,6 +1,5 @@
 
 import { supabase } from '@/integrations/supabase/client';
-import { User } from '@supabase/supabase-js';
 
 export interface Watchlist {
   id: string;
@@ -28,8 +27,8 @@ export const getWatchlists = async (): Promise<Watchlist[]> => {
 };
 
 export const createWatchlist = async (name: string): Promise<Watchlist | null> => {
-  const user = supabase.auth.getUser();
-  const userId = (await user).data.user?.id;
+  const { data: userData } = await supabase.auth.getUser();
+  const userId = userData.user?.id;
   
   if (!userId) throw new Error('Not authenticated');
   

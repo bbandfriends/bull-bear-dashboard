@@ -1,21 +1,23 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import { type StockData } from '@/lib/stockData';
 
 interface StockCardProps {
   stock: StockData;
   onClick?: () => void;
+  onAddToWatchlist?: () => void;
 }
 
-const StockCard: React.FC<StockCardProps> = ({ stock, onClick }) => {
+const StockCard: React.FC<StockCardProps> = ({ stock, onClick, onAddToWatchlist }) => {
   const isPositive = stock.change >= 0;
   
   return (
     <Card 
-      className="stock-card cursor-pointer overflow-hidden" 
+      className="stock-card overflow-hidden" 
       onClick={onClick}
     >
       <CardHeader className="p-4 pb-2 flex flex-row justify-between items-center">
@@ -51,6 +53,19 @@ const StockCard: React.FC<StockCardProps> = ({ stock, onClick }) => {
               <p>{stock.marketCap}</p>
             </div>
           </div>
+          {onAddToWatchlist && (
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="w-full mt-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddToWatchlist();
+              }}
+            >
+              <Plus className="h-4 w-4 mr-1" /> Add to Watchlist
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>

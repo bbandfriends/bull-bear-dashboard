@@ -10,8 +10,16 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import React from "react";
 
-// Create a new QueryClient instance outside of the component
-const queryClient = new QueryClient();
+// Create a new QueryClient instance with default options
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  },
+});
 
 // Protected route component
 const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
