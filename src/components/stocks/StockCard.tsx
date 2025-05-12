@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChartLineUp, ChartLineDown } from 'lucide-react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { type StockData } from '@/lib/stockData';
 
@@ -22,9 +22,9 @@ const StockCard: React.FC<StockCardProps> = ({ stock, onClick }) => {
         <CardTitle className="text-base font-semibold tracking-tight">{stock.symbol}</CardTitle>
         <div className="flex items-center">
           {isPositive ? (
-            <ChartLineUp className="h-4 w-4 text-stock-up mr-1" />
+            <TrendingUp className="h-4 w-4 text-stock-up mr-1" />
           ) : (
-            <ChartLineDown className="h-4 w-4 text-stock-down mr-1" />
+            <TrendingDown className="h-4 w-4 text-stock-down mr-1" />
           )}
         </div>
       </CardHeader>
