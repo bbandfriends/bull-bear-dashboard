@@ -8,50 +8,50 @@ const recommendationsList = [
     id: 1,
     name: "Zerodha Kite",
     image: "/images/zerodha.png",
-    description: "India's largest stock broker offering the lowest trading fees with no hidden charges. Their Kite platform is excellent for beginners and advanced traders alike.",
+    description: "Zerodha charges Rs 0 brokerage for equity delivery trades and direct mutual funds. For intraday and Futures, it charges flat Rs 20 or 0.03% per trade. Further, for Options trades, it charges Flat Rs. 20 per executed order.",
     link: "https://kite.zerodha.com/"
   },
   {
     id: 2,
-    name: "Tickertape",
-    image: "/images/tickertape.png",
-    description: "Great for fundamental analysis with detailed company information, financial ratios, and peer comparison. Their stock screener is very powerful.",
-    link: "https://www.tickertape.in/"
+    name: "Upstox",
+    image: "/images/upstox.png",
+    description: "Upstox's brokerage charges are generally ₹20 per executed order for equity delivery and intraday trades, or 0.05% of the trade value.",
+    link: "https://upstox.com/"
   },
   {
     id: 3,
-    name: "Tradingview",
-    image: "/images/tradingview.png",
-    description: "Best charting platform with advanced technical analysis tools. Great for pattern recognition and strategy creation.",
-    link: "https://www.tradingview.com/"
+    name: "Motilal Oswal",
+    image: "/images/motilal.png",
+    description: "The broking charges for Equity Delivery is 0.20%, 0.02% for Intraday Futures; and Rs 20 per lot for Equity and Currency Options 0.02% for Futures and Rs 200 per lot for Options and it has variet options for SIP investments.",
+    link: "https://www.motilaloswal.com/"
   },
   {
     id: 4,
-    name: "Screener.in",
-    image: "/images/screener.png",
-    description: "Excellent for value investors who want to analyze financial statements and ratios. Filter stocks based on various financial criteria.",
-    link: "https://www.screener.in/"
+    name: "ICICI Direct",
+    image: "/images/icici.png",
+    description: "ICICI Direct's brokerage charges are generally around 0.75% for delivery trades and 0.07% to 0.29% for other segments like intraday, futures, and options. The minimum brokerage is Rs. 35/- per trade or 2.5% of the trade value.",
+    link: "https://www.icicidirect.com/"
   },
   {
     id: 5,
-    name: "Trendlyne",
-    image: "/images/trendlyne.png",
-    description: "Discover market trends, track promoter transactions, and find opportunities with smart stock screeners and personalized alerts.",
-    link: "https://trendlyne.com/"
+    name: "Groww",
+    image: "/images/groww.png",
+    description: "Groww's brokerage charges for equity trades are capped at ₹20 or 0.1% of the trade value, whichever is lower. For F&O trades, the brokerage is ₹20 per order.",
+    link: "https://groww.in/"
   },
   {
     id: 6,
-    name: "MoneyControl",
-    image: "/images/moneycontrol.png",
-    description: "India's leading financial portal offering news, analysis, live stock quotes, IPO information, and portfolio management tools.",
-    link: "https://www.moneycontrol.com/"
+    name: "5paisa",
+    image: "/images/5paisa.png",
+    description: "5paisa offers a flat brokerage charge of ₹20 per order for all segments, including equity delivery, equity intraday, futures & options. The option trading has more brokerage charges so avoid F&O trading using this platform.",
+    link: "https://www.5paisa.com/"
   },
   {
     id: 7,
-    name: "Smallcase",
-    image: "/images/smallcase.png",
-    description: "Invest in ideas with curated portfolios of stocks & ETFs managed by expert investment managers. Great for thematic investing.",
-    link: "https://www.smallcase.com/"
+    name: "Angel One",
+    image: "/images/angel.png",
+    description: "At Angel One, there is Rs. 0 brokerage charge on equity delivery. On other trades like intraday, futures, options, currency and commodity, the brokerage charge is Rs. 20 per executed order or 0.25% of the transaction value this is a highly recommended site for trading for begginers.",
+    link: "https://www.angelone.in/"
   },
   {
     id: 8,
