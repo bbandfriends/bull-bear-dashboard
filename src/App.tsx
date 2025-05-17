@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import React from "react";
+import Recommendations from "./pages/Recommendations";
+import Profile from "./pages/Profile";
 
 // Create a new QueryClient instance with default options
 const queryClient = new QueryClient({
@@ -37,6 +39,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/auth" element={<Auth />} />
       <Route path="/" element={<ProtectedRoute element={<Index />} />} />
+      <Route path="/recommendations" element={<ProtectedRoute element={<Recommendations />} />} />
+      <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>

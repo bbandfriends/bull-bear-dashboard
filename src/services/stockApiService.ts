@@ -1,6 +1,7 @@
 
 import { supabase } from '@/integrations/supabase/client';
 import { StockData } from '@/lib/stockData';
+import { toast } from 'sonner';
 
 export interface StockPrice {
   symbol: string;
@@ -20,11 +21,13 @@ export const fetchRealTimeStockPrices = async (symbols: string[]): Promise<Stock
 
     if (error) {
       console.error('Error fetching stock data:', error);
+      toast.error('Failed to fetch real-time stock prices');
       throw error;
     }
 
     if (!data || !data.results) {
       console.error('Invalid response from stock-data function:', data);
+      toast.error('Unable to retrieve stock data');
       throw new Error('Invalid response from API');
     }
 
@@ -60,4 +63,39 @@ export const updateStocksWithRealTimeData = (
     
     return stock;
   });
+};
+
+// Function to create a periodic data refresh
+export const setupStockDataRefresh = (
+  symbols: string[],
+  onUpdate: (prices: StockPrice[]) => void,
+  intervalMinutes: number = 1
+): () => void => {
+  // Initial fetch
+  fetchRealTimeStockPrices(symbols)
+    .then(prices => {
+      onUpdate(prices);
+      toast.success('Stock prices updated');
+    })
+    .catch(error => {
+      console.error('Failed to fetch initial stock data:', error);
+      toast.error('Failed to fetch stock prices');
+    });
+  
+  // Set up interval for periodic updates
+  const intervalId = setInterval(() => {
+    fetchRealTimeStockPrices(symbols)
+      .then(prices => {
+        onUpdate(prices);
+        toast.success('Stock prices updated', {
+          id: 'stock-update', // Use a consistent ID to prevent multiple toasts
+        });
+      })
+      .catch(error => {
+        console.error('Failed to update stock data:', error);
+      });
+  }, intervalMinutes * 60 * 1000);
+  
+  // Return cleanup function
+  return () => clearInterval(intervalId);
 };

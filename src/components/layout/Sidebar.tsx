@@ -6,35 +6,43 @@ import {
   Home, 
   Settings, 
   ChartLine, 
-  ChartArea, 
+  ThumbsUp, 
   ChartPie, 
   Menu, 
   X
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
 
 type MenuItem = {
   icon: React.ElementType;
   label: string;
+  path: string;
   active?: boolean;
 };
 
 const menuItems: MenuItem[] = [
-  { icon: Home, label: 'Dashboard', active: true },
-  { icon: ChartBarBig, label: 'Market Overview' },
-  { icon: ChartLine, label: 'Stocks' },
-  { icon: ChartArea, label: 'Sectors' },
-  { icon: ChartPie, label: 'Portfolio' },
-  { icon: ChartColumnStacked, label: 'Watchlist' },
-  { icon: Settings, label: 'Settings' },
+  { icon: Home, label: 'Dashboard', path: '/', active: true },
+  { icon: ChartBarBig, label: 'Market Overview', path: '/market' },
+  { icon: ChartLine, label: 'Stocks', path: '/stocks' },
+  { icon: ThumbsUp, label: 'Recommendations', path: '/recommendations' },
+  { icon: ChartPie, label: 'Portfolio', path: '/portfolio' },
+  { icon: ChartColumnStacked, label: 'Watchlist', path: '/watchlist' },
+  { icon: Settings, label: 'Settings', path: '/settings' },
 ];
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
   
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleMobile = () => setMobileOpen(!mobileOpen);
+  
+  const handleMenuClick = (path: string) => {
+    navigate(path);
+    if (mobileOpen) setMobileOpen(false);
+  };
   
   return (
     <>
@@ -74,10 +82,10 @@ const Sidebar = () => {
           <ul className="space-y-1 px-2">
             {menuItems.map((item) => (
               <li key={item.label}>
-                <a 
-                  href="#" 
+                <button 
+                  onClick={() => handleMenuClick(item.path)}
                   className={cn(
-                    "flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     item.active 
                       ? "bg-sidebar-accent text-sidebar-foreground" 
                       : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
@@ -85,7 +93,7 @@ const Sidebar = () => {
                 >
                   <item.icon className="mr-3 h-5 w-5" />
                   {!collapsed && <span>{item.label}</span>}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
