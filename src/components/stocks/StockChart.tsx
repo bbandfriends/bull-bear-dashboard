@@ -14,15 +14,18 @@ import {
   AreaChart
 } from 'recharts';
 import { StockData } from '@/lib/stockData';
+import { Clock, RefreshCw } from 'lucide-react';
 
 interface StockChartProps {
   stock: StockData;
+  onRefresh?: () => void;
 }
 
 type TimeRange = '1D' | '1W' | '1M' | '3M' | '1Y' | 'ALL';
 
-const StockChart: React.FC<StockChartProps> = ({ stock }) => {
+const StockChart: React.FC<StockChartProps> = ({ stock, onRefresh }) => {
   const [timeRange, setTimeRange] = useState<TimeRange>('1D');
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const isPositive = stock.change >= 0;
   
   // In a real application, we would fetch different data based on the timeRange
@@ -32,7 +35,7 @@ const StockChart: React.FC<StockChartProps> = ({ stock }) => {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="stock-chart-tooltip">
+        <div className="stock-chart-tooltip bg-background p-2 border rounded shadow-sm">
           <p className="text-sm font-medium">{`Time: ${label}`}</p>
           <p className="text-sm font-medium text-primary">{`Price: ₹${payload[0].value.toFixed(2)}`}</p>
         </div>
@@ -42,12 +45,31 @@ const StockChart: React.FC<StockChartProps> = ({ stock }) => {
     return null;
   };
   
+  const handleRefresh = async () => {
+    if (onRefresh) {
+      setIsRefreshing(true);
+      try {
+        await onRefresh();
+      } finally {
+        setTimeout(() => setIsRefreshing(false), 500);
+      }
+    }
+  };
+  
   return (
     <Card className="h-full">
       <CardHeader className="flex flex-row items-center justify-between p-4">
-        <CardTitle className="text-lg font-bold">
-          {stock.name} ({stock.symbol}) Price Chart
-        </CardTitle>
+        <div>
+          <CardTitle className="text-lg font-bold">
+            {stock.name} ({stock.symbol}) Price Chart
+          </CardTitle>
+          {stock.lastUpdated && (
+            <div className="text-xs text-muted-foreground mt-1 flex items-center">
+              <Clock className="h-3 w-3 mr-1" />
+              Last updated: {new Date(stock.lastUpdated).toLocaleTimeString()}
+            </div>
+          )}
+        </div>
         <div className="flex space-x-1">
           {(['1D', '1W', '1M', '3M', '1Y', 'ALL'] as TimeRange[]).map((range) => (
             <Button 
@@ -60,6 +82,18 @@ const StockChart: React.FC<StockChartProps> = ({ stock }) => {
               {range}
             </Button>
           ))}
+          {onRefresh && (
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="ml-2 h-7"
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+            >
+              <RefreshCw className={`h-3 w-3 mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
+              Refresh
+            </Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="p-4">

@@ -1,4 +1,3 @@
-
 export type StockData = {
   id: string;
   symbol: string;
@@ -14,6 +13,7 @@ export type StockData = {
     time: string;
     price: number;
   }[];
+  lastUpdated?: string; // New field for tracking when stock was last updated
 };
 
 export type NewsItem = {
@@ -190,7 +190,14 @@ export const fetchStocks = async (): Promise<StockData[]> => {
   // In a real application, this would fetch from an API
   // For now, we'll return mock data after a small delay to simulate network request
   return new Promise((resolve) => {
-    setTimeout(() => resolve(mockStockData), 500);
+    setTimeout(() => {
+      // Add lastUpdated field to all stocks
+      const stocksWithTimestamp = mockStockData.map(stock => ({
+        ...stock,
+        lastUpdated: new Date().toISOString()
+      }));
+      resolve(stocksWithTimestamp);
+    }, 500);
   });
 };
 

@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Plus, X, Search } from 'lucide-react';
+import { Plus, X, Search, RefreshCw } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
@@ -35,6 +35,7 @@ import {
   WatchlistStock
 } from '@/services/watchlistService';
 import { searchStocks, StockData } from '@/lib/stockData';
+import { fetchRealTimeStockPrices, updateStocksWithRealTimeData } from '@/services/stockApiService';
 import { useAuth } from '@/contexts/AuthContext';
 
 const WatchlistPage = () => {
@@ -169,6 +170,7 @@ const WatchlistContent = ({ watchlistId }: { watchlistId: string }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<StockData[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const queryClient = useQueryClient();
   
   const { data: watchlistStocks, isLoading } = useQuery({
@@ -182,11 +184,28 @@ const WatchlistContent = ({ watchlistId }: { watchlistId: string }) => {
     queryFn: () => import('@/lib/stockData').then(module => module.fetchStocks())
   });
   
+  // Find stock symbols to fetch real-time data for
+  const stockSymbols = React.useMemo(() => {
+    if (!watchlistStocks) return [];
+    return watchlistStocks.map(item => item.stock_symbol);
+  }, [watchlistStocks]);
+  
+  // Query for real-time stock prices
+  const { data: realTimeData, refetch: refetchRealTimeData } = useQuery({
+    queryKey: ['realTimeWatchlist', watchlistId],
+    queryFn: async () => {
+      if (stockSymbols.length === 0) return [];
+      return await fetchRealTimeStockPrices(stockSymbols);
+    },
+    enabled: stockSymbols.length > 0,
+    refetchInterval: 60000 * 5 // Refresh every 5 minutes
+  });
+  
   // Find full stock data for each stock in the watchlist
   const watchlistStocksWithDetails = React.useMemo(() => {
     if (!watchlistStocks || !allStocks) return [];
     
-    return watchlistStocks.map(watchlistStock => {
+    let stocks = watchlistStocks.map(watchlistStock => {
       const stockDetails = allStocks.find(stock => 
         stock.symbol === watchlistStock.stock_symbol
       );
@@ -195,7 +214,33 @@ const WatchlistContent = ({ watchlistId }: { watchlistId: string }) => {
         details: stockDetails
       };
     });
-  }, [watchlistStocks, allStocks]);
+    
+    // Update with real-time data if available
+    if (realTimeData && realTimeData.length > 0) {
+      const priceMap = new Map(realTimeData.map(item => [item.symbol, item]));
+      
+      stocks = stocks.map(item => {
+        if (!item.details) return item;
+        
+        const realTimePrice = priceMap.get(item.stock_symbol);
+        if (!realTimePrice) return item;
+        
+        return {
+          ...item,
+          details: {
+            ...item.details,
+            price: realTimePrice.price,
+            change: realTimePrice.change,
+            changePercent: realTimePrice.changePercent,
+            volume: realTimePrice.volume || item.details.volume,
+            lastUpdated: new Date().toISOString()
+          }
+        };
+      });
+    }
+    
+    return stocks;
+  }, [watchlistStocks, allStocks, realTimeData]);
   
   useEffect(() => {
     const handleSearch = async () => {
@@ -249,6 +294,18 @@ const WatchlistContent = ({ watchlistId }: { watchlistId: string }) => {
   
   const handleRemoveStock = (stockSymbol: string) => {
     removeStockMutation.mutate({ watchlistId, stockSymbol });
+  };
+  
+  const handleRefreshPrices = async () => {
+    setIsRefreshing(true);
+    try {
+      await refetchRealTimeData();
+      toast.success('Stock prices updated');
+    } catch (error) {
+      toast.error('Failed to refresh prices');
+    } finally {
+      setIsRefreshing(false);
+    }
   };
   
   // Check if a stock is already in the watchlist
@@ -315,8 +372,17 @@ const WatchlistContent = ({ watchlistId }: { watchlistId: string }) => {
       )}
       
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Stocks in this watchlist</CardTitle>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleRefreshPrices}
+            disabled={isRefreshing || watchlistStocksWithDetails.length === 0}
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            Refresh Prices
+          </Button>
         </CardHeader>
         <CardContent>
           {isLoading ? (

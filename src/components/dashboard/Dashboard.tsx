@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchStocks, fetchNews, type StockData } from '@/lib/stockData';
+import { fetchRealTimeStockPrices, updateStocksWithRealTimeData } from '@/services/stockApiService';
 import StockCard from '../stocks/StockCard';
 import StockChart from '../stocks/StockChart';
 import NewsCard from '../news/NewsCard';
@@ -10,12 +11,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import WatchlistPage from '../watchlist/WatchlistPage';
 import { useAuth } from '@/contexts/AuthContext';
 import StockDetailsDialog from '../stocks/StockDetailsDialog';
+import { toast } from 'sonner';
+import { Clock } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const [selectedStock, setSelectedStock] = useState<StockData | null>(null);
   const [activeTab, setActiveTab] = useState<string>('market');
   const [isStockDialogOpen, setIsStockDialogOpen] = useState(false);
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   
   const { 
     data: stocks, 
@@ -26,6 +30,39 @@ const Dashboard: React.FC = () => {
     queryFn: fetchStocks,
     enabled: !!user
   });
+
+  // Query for real-time stock data
+  const { 
+    data: realTimeStocks,
+    isLoading: realTimeLoading,
+    error: realTimeError,
+    refetch: refetchRealTimeData
+  } = useQuery({
+    queryKey: ['realTimeStocks'],
+    queryFn: async () => {
+      if (!stocks) return [];
+      const symbols = stocks.map(stock => stock.symbol);
+      try {
+        const data = await fetchRealTimeStockPrices(symbols);
+        return data;
+      } catch (error) {
+        console.error("Failed to fetch real-time data:", error);
+        toast.error("Could not fetch real-time prices. Using cached data.");
+        return [];
+      }
+    },
+    enabled: !!stocks && stocks.length > 0,
+    refetchInterval: 60000 * 5, // Refresh every 5 minutes
+    retry: 2
+  });
+  
+  // Combine mock data with real-time data
+  const combinedStocks = React.useMemo(() => {
+    if (!stocks) return [];
+    if (!realTimeStocks || realTimeStocks.length === 0) return stocks;
+    
+    return updateStocksWithRealTimeData(stocks, realTimeStocks);
+  }, [stocks, realTimeStocks]);
   
   const { 
     data: news, 
@@ -39,14 +76,25 @@ const Dashboard: React.FC = () => {
   
   // Set the first stock as selected when data loads
   useEffect(() => {
-    if (stocks && stocks.length > 0 && !selectedStock) {
-      setSelectedStock(stocks[0]);
+    if (combinedStocks && combinedStocks.length > 0 && !selectedStock) {
+      setSelectedStock(combinedStocks[0]);
+    } else if (combinedStocks && selectedStock) {
+      // Update selected stock with real-time data if it exists
+      const updatedSelectedStock = combinedStocks.find(stock => stock.symbol === selectedStock.symbol);
+      if (updatedSelectedStock) {
+        setSelectedStock(updatedSelectedStock);
+      }
     }
-  }, [stocks, selectedStock]);
+  }, [combinedStocks, selectedStock]);
   
   const handleStockClick = (stock: StockData) => {
     setSelectedStock(stock);
     setIsStockDialogOpen(true);
+  };
+  
+  const handleRefreshData = () => {
+    refetchRealTimeData();
+    toast.info("Refreshing stock prices...");
   };
   
   if (stocksError || newsError) {
@@ -70,7 +118,24 @@ const Dashboard: React.FC = () => {
         <TabsContent value="market" className="pt-6">
           {/* Market Overview Section */}
           <section>
-            <h2 className="text-2xl font-bold mb-4">Market Overview</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold">Market Overview</h2>
+              <div className="flex items-center">
+                {realTimeStocks && realTimeStocks.length > 0 && (
+                  <div className="text-xs text-muted-foreground mr-4 flex items-center">
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>Last updated: {new Date().toLocaleTimeString()}</span>
+                  </div>
+                )}
+                <button 
+                  onClick={handleRefreshData}
+                  className="text-sm px-3 py-1 rounded bg-primary text-primary-foreground hover:bg-primary/90"
+                  disabled={realTimeLoading}
+                >
+                  {realTimeLoading ? "Updating..." : "Refresh Prices"}
+                </button>
+              </div>
+            </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {stocksLoading ? (
                 // Loading skeletons
@@ -89,7 +154,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 ))
               ) : (
-                stocks?.map((stock) => (
+                combinedStocks?.map((stock) => (
                   <StockCard 
                     key={stock.id} 
                     stock={stock} 
