@@ -6,10 +6,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/com
 const recommendationsList = [
   {
     id: 1,
-    name: "Zerodha Kite",
-    image: "/lovable-uploads/6e2572ac-a972-45c3-bf99-e0e6fb0df930.png",
-    description: "Zerodha charges Rs 0 brokerage for equity delivery trades and direct mutual funds. For intraday and Futures, it charges flat Rs 20 or 0.03% per trade. Further, for Options trades, it charges Flat Rs. 20 per executed order.",
-    link: "https://kite.zerodha.com/"
+    name: "Varsity by Zerodha",
+    image: "/lovable-uploads/4e59c808-8499-4ee4-a7b5-d45405af0e29.png",
+    description: "Comprehensive educational resource covering all aspects of trading and investing. Perfect for beginners looking to learn market fundamentals.",
+    link: "https://zerodha.com/varsity/"
   },
   {
     id: 2,
@@ -62,10 +62,10 @@ const recommendationsList = [
   },
   {
     id: 9,
-    name: "Varsity by Zerodha",
-    image: "/lovable-uploads/4e59c808-8499-4ee4-a7b5-d45405af0e29.png",
-    description: "Comprehensive educational resource covering all aspects of trading and investing. Perfect for beginners looking to learn market fundamentals.",
-    link: "https://zerodha.com/varsity/"
+    name: "Zerodha Kite",
+    image: "/lovable-uploads/6e2572ac-a972-45c3-bf99-e0e6fb0df930.png",
+    description: "Zerodha charges Rs 0 brokerage for equity delivery trades and direct mutual funds. For intraday and Futures, it charges flat Rs 20 or 0.03% per trade. Further, for Options trades, it charges Flat Rs. 20 per executed order.",
+    link: "https://kite.zerodha.com/"
   },
   {
     id: 10,
