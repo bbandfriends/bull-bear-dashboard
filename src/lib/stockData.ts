@@ -1,4 +1,3 @@
-
 export type StockData = {
   id: string;
   symbol: string;
