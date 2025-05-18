@@ -14,6 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 type MenuItem = {
   icon: React.ElementType;
@@ -106,17 +107,27 @@ const Sidebar = () => {
         </nav>
         
         <div className="border-t border-sidebar-border p-4">
-          {!collapsed && (
+          {!collapsed ? (
             <div className="flex items-center">
-              <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
-                {userInitial}
-              </div>
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="bg-primary text-white">
+                  {userInitial}
+                </AvatarFallback>
+              </Avatar>
               <div className="ml-3">
                 <p className="text-sm font-medium text-sidebar-foreground">{username}</p>
                 <p className="text-xs text-sidebar-foreground/70">
                   {user ? 'Logged In' : 'Guest User'}
                 </p>
               </div>
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="bg-primary text-white">
+                  {userInitial}
+                </AvatarFallback>
+              </Avatar>
             </div>
           )}
         </div>

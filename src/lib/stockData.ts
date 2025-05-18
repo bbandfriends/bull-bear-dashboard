@@ -1,3 +1,4 @@
+
 export type StockData = {
   id: string;
   symbol: string;
@@ -26,7 +27,7 @@ export type NewsItem = {
   relatedSymbols: string[];
 };
 
-// Mock data for Indian stocks
+// Mock data for Indian stocks (Nifty 50)
 const mockStockData: StockData[] = [
   {
     id: "1",
@@ -183,6 +184,175 @@ const mockStockData: StockData[] = [
     high52w: 1185.00,
     low52w: 875.25,
     chartData: generateChartData(1130, 150, 20, false)
+  },
+  {
+    id: "13",
+    symbol: "ASIANPAINT",
+    name: "Asian Paints Ltd",
+    price: 2845.60,
+    change: 32.20,
+    changePercent: 1.14,
+    volume: 954872,
+    marketCap: "2.73L Cr",
+    high52w: 3590.00,
+    low52w: 2650.00,
+    chartData: generateChartData(2840, 200, 20, true)
+  },
+  {
+    id: "14",
+    symbol: "MARUTI",
+    name: "Maruti Suzuki India",
+    price: 10578.30,
+    change: -124.75,
+    changePercent: -1.17,
+    volume: 342561,
+    marketCap: "3.19L Cr",
+    high52w: 12350.00,
+    low52w: 8845.00,
+    chartData: generateChartData(10570, 800, 20, false)
+  },
+  {
+    id: "15",
+    symbol: "KOTAKBANK",
+    name: "Kotak Mahindra Bank",
+    price: 1832.45,
+    change: 18.70,
+    changePercent: 1.03,
+    volume: 1253487,
+    marketCap: "3.64L Cr",
+    high52w: 2063.00,
+    low52w: 1631.00,
+    chartData: generateChartData(1830, 150, 20, true)
+  },
+  {
+    id: "16",
+    symbol: "SUNPHARMA",
+    name: "Sun Pharmaceutical",
+    price: 1248.75,
+    change: -8.65,
+    changePercent: -0.69,
+    volume: 987452,
+    marketCap: "3.00L Cr",
+    high52w: 1320.00,
+    low52w: 943.00,
+    chartData: generateChartData(1250, 100, 20, false)
+  },
+  {
+    id: "17",
+    symbol: "BHARTIARTL",
+    name: "Bharti Airtel Ltd",
+    price: 1157.80,
+    change: 15.60,
+    changePercent: 1.37,
+    volume: 2583641,
+    marketCap: "6.43L Cr",
+    high52w: 1198.00,
+    low52w: 852.00,
+    chartData: generateChartData(1150, 100, 20, true)
+  },
+  {
+    id: "18",
+    symbol: "NTPC",
+    name: "NTPC Ltd",
+    price: 298.45,
+    change: 5.80,
+    changePercent: 1.98,
+    volume: 3254789,
+    marketCap: "2.89L Cr",
+    high52w: 325.00,
+    low52w: 176.00,
+    chartData: generateChartData(295, 50, 20, true)
+  },
+  {
+    id: "19",
+    symbol: "POWERGRID",
+    name: "Power Grid Corporation",
+    price: 273.60,
+    change: -3.25,
+    changePercent: -1.17,
+    volume: 2536984,
+    marketCap: "2.55L Cr",
+    high52w: 318.00,
+    low52w: 197.00,
+    chartData: generateChartData(275, 40, 20, false)
+  },
+  {
+    id: "20",
+    symbol: "LT",
+    name: "Larsen & Toubro",
+    price: 3274.90,
+    change: 41.50,
+    changePercent: 1.28,
+    volume: 847562,
+    marketCap: "4.59L Cr",
+    high52w: 3658.00,
+    low52w: 2454.00,
+    chartData: generateChartData(3270, 300, 20, true)
+  },
+  {
+    id: "21",
+    symbol: "ULTRACEMCO",
+    name: "UltraTech Cement Ltd",
+    price: 9846.30,
+    change: -92.65,
+    changePercent: -0.93,
+    volume: 236548,
+    marketCap: "2.84L Cr",
+    high52w: 10479.00,
+    low52w: 7145.00,
+    chartData: generateChartData(9840, 800, 20, false)
+  },
+  {
+    id: "22",
+    symbol: "TITAN",
+    name: "Titan Company Ltd",
+    price: 3312.75,
+    change: 58.45,
+    changePercent: 1.79,
+    volume: 548621,
+    marketCap: "2.94L Cr",
+    high52w: 3625.00,
+    low52w: 2450.00,
+    chartData: generateChartData(3310, 300, 20, true)
+  },
+  {
+    id: "23",
+    symbol: "BAJAJFINSV",
+    name: "Bajaj Finserv Ltd",
+    price: 1645.80,
+    change: -12.35,
+    changePercent: -0.74,
+    volume: 684523,
+    marketCap: "2.62L Cr",
+    high52w: 1900.00,
+    low52w: 1354.00,
+    chartData: generateChartData(1645, 150, 20, false)
+  },
+  {
+    id: "24",
+    symbol: "NESTLEIND",
+    name: "Nestle India Ltd",
+    price: 2487.45,
+    change: 32.65,
+    changePercent: 1.33,
+    volume: 142536,
+    marketCap: "2.40L Cr",
+    high52w: 2670.00,
+    low52w: 2045.00,
+    chartData: generateChartData(2485, 200, 20, true)
+  },
+  {
+    id: "25",
+    symbol: "GRASIM",
+    name: "Grasim Industries Ltd",
+    price: 2065.30,
+    change: -18.45,
+    changePercent: -0.89,
+    volume: 354621,
+    marketCap: "1.36L Cr",
+    high52w: 2255.00,
+    low52w: 1710.00,
+    chartData: generateChartData(2065, 180, 20, false)
   }
 ];
 
@@ -240,6 +410,42 @@ const mockNewsData: NewsItem[] = [
     summary: "Leading market analysts have issued positive outlooks for the FMCG sector, with companies like Hindustan Unilever expected to benefit from improving rural demand and easing input costs.",
     url: "#",
     relatedSymbols: ["HINDUNILVR"]
+  },
+  {
+    id: "7",
+    title: "Bharti Airtel announces 5G expansion to cover all major cities",
+    source: "ET Telecom",
+    time: "Today",
+    summary: "Bharti Airtel has accelerated its 5G rollout plan, with the aim to cover all major Indian cities by the end of this quarter, significantly ahead of the original timeline.",
+    url: "#",
+    relatedSymbols: ["BHARTIARTL"]
+  },
+  {
+    id: "8",
+    title: "Asian Paints reports 15% growth in quarterly profit",
+    source: "Moneycontrol",
+    time: "3 hours ago",
+    summary: "Asian Paints has reported a 15% year-on-year increase in net profit for the latest quarter, driven by strong volume growth in the decorative paints segment despite raw material price pressures.",
+    url: "#",
+    relatedSymbols: ["ASIANPAINT"]
+  },
+  {
+    id: "9",
+    title: "L&T secures major infrastructure contracts worth ₹8,000 crore",
+    source: "Business Line",
+    time: "Yesterday",
+    summary: "Larsen & Toubro has secured multiple infrastructure contracts worth approximately ₹8,000 crore across various segments including transportation, water treatment, and power transmission.",
+    url: "#",
+    relatedSymbols: ["LT"]
+  },
+  {
+    id: "10",
+    title: "NTPC targets 60 GW renewable energy capacity by 2032",
+    source: "Economic Times",
+    time: "Today",
+    summary: "NTPC has revised its renewable energy target upward, now aiming to achieve 60 GW capacity by 2032, as part of its strategic shift towards green energy and reducing carbon footprint.",
+    url: "#",
+    relatedSymbols: ["NTPC"]
   }
 ];
 
