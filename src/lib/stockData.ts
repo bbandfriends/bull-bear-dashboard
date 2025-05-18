@@ -105,6 +105,84 @@ const mockStockData: StockData[] = [
     high52w: 2750.00,
     low52w: 2460.35,
     chartData: generateChartData(2570, 200, 20, false)
+  },
+  {
+    id: "7",
+    symbol: "WIPRO",
+    name: "Wipro Ltd",
+    price: 487.25,
+    change: 6.75,
+    changePercent: 1.40,
+    volume: 1562498,
+    marketCap: "2.67L Cr",
+    high52w: 510.75,
+    low52w: 351.85,
+    chartData: generateChartData(480, 100, 20, true)
+  },
+  {
+    id: "8",
+    symbol: "TATAMOTORS",
+    name: "Tata Motors Ltd",
+    price: 853.60,
+    change: 15.80,
+    changePercent: 1.89,
+    volume: 3254896,
+    marketCap: "2.84L Cr",
+    high52w: 875.65,
+    low52w: 375.50,
+    chartData: generateChartData(840, 180, 20, true)
+  },
+  {
+    id: "9",
+    symbol: "BAJFINANCE",
+    name: "Bajaj Finance Ltd",
+    price: 6748.55,
+    change: -85.60,
+    changePercent: -1.25,
+    volume: 987542,
+    marketCap: "4.08L Cr",
+    high52w: 7950.00,
+    low52w: 5611.35,
+    chartData: generateChartData(6800, 500, 20, false)
+  },
+  {
+    id: "10",
+    symbol: "ADANIPORTS",
+    name: "Adani Ports Ltd",
+    price: 942.30,
+    change: 22.15,
+    changePercent: 2.41,
+    volume: 2154678,
+    marketCap: "1.94L Cr",
+    high52w: 987.90,
+    low52w: 545.20,
+    chartData: generateChartData(920, 150, 20, true)
+  },
+  {
+    id: "11",
+    symbol: "SBIN",
+    name: "State Bank of India",
+    price: 745.90,
+    change: 13.75,
+    changePercent: 1.88,
+    volume: 4236589,
+    marketCap: "6.65L Cr",
+    high52w: 773.45,
+    low52w: 499.35,
+    chartData: generateChartData(740, 120, 20, true)
+  },
+  {
+    id: "12",
+    symbol: "AXISBANK",
+    name: "Axis Bank Ltd",
+    price: 1126.75,
+    change: -5.40,
+    changePercent: -0.48,
+    volume: 1854632,
+    marketCap: "3.48L Cr",
+    high52w: 1185.00,
+    low52w: 875.25,
+    chartData: generateChartData(1130, 150, 20, false)
   }
 ];
 

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 type MenuItem = {
   icon: React.ElementType;
@@ -35,6 +36,7 @@ const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
   
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleMobile = () => setMobileOpen(!mobileOpen);
@@ -43,6 +45,10 @@ const Sidebar = () => {
     navigate(path);
     if (mobileOpen) setMobileOpen(false);
   };
+
+  // Extract username from email or use default
+  const username = user?.email ? user.email.split('@')[0] : 'User';
+  const userInitial = username.charAt(0).toUpperCase();
   
   return (
     <>
@@ -102,10 +108,14 @@ const Sidebar = () => {
         <div className="border-t border-sidebar-border p-4">
           {!collapsed && (
             <div className="flex items-center">
-              <div className="h-8 w-8 rounded-full bg-primary"></div>
+              <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
+                {userInitial}
+              </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-sidebar-foreground">Raj Sharma</p>
-                <p className="text-xs text-sidebar-foreground/70">Premium User</p>
+                <p className="text-sm font-medium text-sidebar-foreground">{username}</p>
+                <p className="text-xs text-sidebar-foreground/70">
+                  {user ? 'Logged In' : 'Guest User'}
+                </p>
               </div>
             </div>
           )}

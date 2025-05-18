@@ -9,6 +9,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      call_records: {
+        Row: {
+          duration: number
+          id: string
+          phone_number: string
+          reported: boolean
+          scam_detected: boolean
+          scam_words: string[] | null
+          timestamp: string
+          transcript: string | null
+          user_id: string
+        }
+        Insert: {
+          duration: number
+          id?: string
+          phone_number: string
+          reported?: boolean
+          scam_detected?: boolean
+          scam_words?: string[] | null
+          timestamp?: string
+          transcript?: string | null
+          user_id: string
+        }
+        Update: {
+          duration?: number
+          id?: string
+          phone_number?: string
+          reported?: boolean
+          scam_detected?: boolean
+          scam_words?: string[] | null
+          timestamp?: string
+          transcript?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -33,6 +69,30 @@ export type Database = {
           id?: string
           updated_at?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      scam_reports: {
+        Row: {
+          id: string
+          phone_number: string
+          report_reason: string | null
+          timestamp: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          phone_number: string
+          report_reason?: string | null
+          timestamp?: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          phone_number?: string
+          report_reason?: string | null
+          timestamp?: string
+          user_id?: string
         }
         Relationships: []
       }
