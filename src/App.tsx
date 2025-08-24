@@ -11,6 +11,11 @@ import NotFound from "./pages/NotFound";
 import React from "react";
 import Recommendations from "./pages/Recommendations";
 import Profile from "./pages/Profile";
+import Market from "./pages/Market";
+import Stocks from "./pages/Stocks";
+import Portfolio from "./pages/Portfolio";
+import Settings from "./pages/Settings";
+import WatchlistPage from "./components/watchlist/WatchlistPage";
 
 // Create a new QueryClient instance with default options
 const queryClient = new QueryClient({
@@ -39,7 +44,12 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/auth" element={<Auth />} />
       <Route path="/" element={<ProtectedRoute element={<Index />} />} />
+      <Route path="/market" element={<ProtectedRoute element={<Market />} />} />
+      <Route path="/stocks" element={<ProtectedRoute element={<Stocks />} />} />
       <Route path="/recommendations" element={<ProtectedRoute element={<Recommendations />} />} />
+      <Route path="/portfolio" element={<ProtectedRoute element={<Portfolio />} />} />
+      <Route path="/watchlist" element={<ProtectedRoute element={<WatchlistPage />} />} />
+      <Route path="/settings" element={<ProtectedRoute element={<Settings />} />} />
       <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
