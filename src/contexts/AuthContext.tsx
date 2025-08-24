@@ -56,14 +56,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw error;
       }
     } catch (error: any) {
-      toast.error(error.message || 'Failed to sign in');
+      console.error('Sign in error:', error);
+      if (error.message?.includes('fetch')) {
+        toast.error('Connection error. Please check if the server is running and try again.');
+      } else {
+        toast.error(error.message || 'Failed to sign in');
+      }
       throw error;
     }
   };
 
   const signUp = async (email: string, password: string) => {
     try {
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`
+        }
+      });
       
       if (error) {
         throw error;
@@ -71,7 +82,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       toast.success('Sign up successful! Please check your email to verify your account.');
     } catch (error: any) {
-      toast.error(error.message || 'Failed to sign up');
+      console.error('Sign up error:', error);
+      if (error.message?.includes('fetch')) {
+        toast.error('Connection error. Please check if the server is running and try again.');
+      } else {
+        toast.error(error.message || 'Failed to sign up');
+      }
       throw error;
     }
   };
