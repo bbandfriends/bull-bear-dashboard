@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { AppLayout } from "@/components/AppLayout";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
@@ -28,7 +29,7 @@ const queryClient = new QueryClient({
   },
 });
 
-// Protected route component
+// Protected route component that wraps content with layout
 const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
   const { user, loading } = useAuth();
   
@@ -36,7 +37,13 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) 
     return <div className="flex h-screen items-center justify-center">Loading...</div>;
   }
   
-  return user ? element : <Navigate to="/auth" replace />;
+  return user ? (
+    <AppLayout>
+      {element}
+    </AppLayout>
+  ) : (
+    <Navigate to="/auth" replace />
+  );
 };
 
 const AppRoutes = () => {

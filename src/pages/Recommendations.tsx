@@ -78,7 +78,7 @@ const recommendationsList = [
 
 const Recommendations = () => {
   return (
-    <div className="container mx-auto p-4 pt-16">
+    <div className="p-6">
       <h1 className="text-3xl font-bold mb-8">Recommended Stock Market Apps & Tools</h1>
       <p className="text-muted-foreground mb-8">
         Discover the best apps and tools to enhance your trading and investment journey in the Indian stock market.
