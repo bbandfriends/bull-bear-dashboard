@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp, DollarSign, PieChart, Target } from 'lucide-react';
+import { PortfolioChart } from '@/components/portfolio/PortfolioChart';
+import { HoldingsTable } from '@/components/portfolio/HoldingsTable';
 
 const Portfolio = () => {
   return (
@@ -56,19 +58,34 @@ const Portfolio = () => {
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Portfolio Performance</CardTitle>
-          <CardDescription>
-            Your investment journey over time
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-8">
-            <p className="text-muted-foreground">Portfolio tracking coming soon...</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <PortfolioChart />
+        </div>
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Quick Stats</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Day's P&L</span>
+                <span className="text-green-600 font-medium">+₹3,450 (1.43%)</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Total P&L</span>
+                <span className="text-green-600 font-medium">+₹45,231 (22.6%)</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Free Cash</span>
+                <span className="font-medium">₹15,420</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      <HoldingsTable />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
@@ -15,6 +15,7 @@ import {
 } from 'recharts';
 import { StockData } from '@/lib/stockData';
 import { Clock, RefreshCw } from 'lucide-react';
+import { getCachedChartData, ChartDataPoint } from '@/services/chartDataService';
 
 interface StockChartProps {
   stock: StockData;
@@ -26,11 +27,19 @@ type TimeRange = '1D' | '1W' | '1M' | '3M' | '1Y' | 'ALL';
 const StockChart: React.FC<StockChartProps> = ({ stock, onRefresh }) => {
   const [timeRange, setTimeRange] = useState<TimeRange>('1D');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const isPositive = stock.change >= 0;
   
-  // In a real application, we would fetch different data based on the timeRange
-  // For now, we'll just use the same data for demonstration
-  const chartData = stock.chartData;
+  // Update chart data when time range or stock changes
+  useEffect(() => {
+    const data = getCachedChartData(
+      stock.symbol, 
+      timeRange, 
+      stock.price, 
+      isPositive
+    );
+    setChartData(data);
+  }, [timeRange, stock.symbol, stock.price, isPositive]);
   
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {

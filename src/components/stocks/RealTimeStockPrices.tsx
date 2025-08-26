@@ -61,7 +61,8 @@ const RealTimeStockPrices = () => {
     setLastUpdated(new Date().toLocaleTimeString());
     setLoading(false);
     
-    const cleanup = setupStockDataRefresh(POPULAR_STOCKS, updatePrices);
+    // Set up real-time data refresh every 30 seconds for more frequent updates
+    const cleanup = setupStockDataRefresh(POPULAR_STOCKS, updatePrices, 0.5);
     return cleanup;
   }, []);
   
