@@ -2,7 +2,33 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
 
+const getMarketStatus = () => {
+  const now = new Date();
+  const day = now.getDay(); // 0 = Sunday, 6 = Saturday
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const currentTime = hours * 60 + minutes; // Convert to minutes for easier comparison
+  
+  // Market closed on weekends
+  if (day === 0 || day === 6) {
+    return { status: 'Market Closed', reason: 'Weekend', color: 'text-red-600' };
+  }
+  
+  // Market hours: 9:15 AM (555 minutes) to 3:15 PM (915 minutes)
+  const marketOpen = 9 * 60 + 15; // 9:15 AM
+  const marketClose = 15 * 60 + 15; // 3:15 PM
+  
+  if (currentTime >= marketOpen && currentTime <= marketClose) {
+    return { status: 'Market Open', reason: '9:15 AM - 3:15 PM', color: 'text-green-600' };
+  } else if (currentTime < marketOpen) {
+    return { status: 'Pre-Market', reason: 'Opens at 9:15 AM', color: 'text-orange-600' };
+  } else {
+    return { status: 'Market Closed', reason: 'Closed at 3:15 PM', color: 'text-red-600' };
+  }
+};
+
 const Market = () => {
+  const marketInfo = getMarketStatus();
   const marketData = [
     { name: 'NIFTY 50', price: '19,542.65', change: '+124.30 (+0.64%)', positive: true },
     { name: 'SENSEX', price: '65,995.63', change: '+418.74 (+0.64%)', positive: true },
@@ -50,7 +76,8 @@ const Market = () => {
             <Activity className="h-8 w-8 text-primary" />
             <div>
               <p className="text-sm text-muted-foreground">Market Status</p>
-              <p className="text-lg font-semibold text-green-600">Market Open</p>
+              <p className={`text-lg font-semibold ${marketInfo.color}`}>{marketInfo.status}</p>
+              <p className="text-sm text-muted-foreground">{marketInfo.reason}</p>
             </div>
           </div>
         </CardContent>
