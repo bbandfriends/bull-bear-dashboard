@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, DollarSign, PieChart, Target } from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, PieChart, Target } from 'lucide-react';
 import { PortfolioChart } from '@/components/portfolio/PortfolioChart';
 import { HoldingsTable } from '@/components/portfolio/HoldingsTable';
 
@@ -19,19 +19,19 @@ const Portfolio = () => {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹2,43,740</div>
-            <p className="text-xs text-green-600">+5.48% from last month</p>
+            <div className="text-2xl font-bold">₹2,41,355</div>
+            <p className="text-xs text-red-600">-4.88% from last month</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Today's Gain</CardTitle>
-            <TrendingUp className="h-4 w-4 text-green-600" />
+            <TrendingDown className="h-4 w-4 text-red-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+₹12,740</div>
-            <p className="text-xs text-green-600">+5.48%</p>
+            <div className="text-2xl font-bold">-₹1,650</div>
+            <p className="text-xs text-red-600">-0.68%</p>
           </CardContent>
         </Card>
 
@@ -41,7 +41,7 @@ const Portfolio = () => {
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹2,31,000</div>
+            <div className="text-2xl font-bold">₹2,53,500</div>
             <p className="text-xs text-muted-foreground">Principal amount</p>
           </CardContent>
         </Card>
@@ -70,15 +70,11 @@ const Portfolio = () => {
             <CardContent className="space-y-4">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Day's P&L</span>
-                <span className="text-green-600 font-medium">+₹12,740 (5.48%)</span>
+                <span className="text-red-600 font-medium">-₹1,650 (0.68%)</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Total P&L</span>
-                <span className="text-green-600 font-medium">+₹12,740 (5.48%)</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Free Cash</span>
-                <span className="font-medium">₹25,420</span>
+                <span className="text-red-600 font-medium">-₹12,145 (4.79%)</span>
               </div>
             </CardContent>
           </Card>

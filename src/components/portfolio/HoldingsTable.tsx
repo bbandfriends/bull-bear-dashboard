@@ -26,41 +26,41 @@ const mockHoldings: Holding[] = [
     symbol: 'TCS',
     name: 'Tata Consultancy Services',
     quantity: 50,
-    avgPrice: 2800,
-    currentPrice: 2960,
-    value: 148000,
-    pnl: 8000,
-    pnlPercent: 5.71
+    avgPrice: 3100,
+    currentPrice: 2930.40,
+    value: 146520,
+    pnl: -8480,
+    pnlPercent: -5.48
   },
   {
     symbol: 'INFY',
     name: 'Infosys Limited',
     quantity: 30,
-    avgPrice: 1400,
-    currentPrice: 1485,
-    value: 44550,
-    pnl: 2550,
-    pnlPercent: 6.07
+    avgPrice: 1520,
+    currentPrice: 1459.90,
+    value: 43797,
+    pnl: -1803,
+    pnlPercent: -3.95
   },
   {
     symbol: 'HDFCBANK',
     name: 'HDFC Bank Limited',
     quantity: 25,
-    avgPrice: 920,
-    currentPrice: 950,
-    value: 23750,
-    pnl: 750,
-    pnlPercent: 3.26
+    avgPrice: 980,
+    currentPrice: 947.30,
+    value: 23682.50,
+    pnl: -817.50,
+    pnlPercent: -3.34
   },
   {
     symbol: 'RELIANCE',
     name: 'Reliance Industries',
     quantity: 20,
-    avgPrice: 1300,
-    currentPrice: 1372,
-    value: 27440,
-    pnl: 1440,
-    pnlPercent: 5.54
+    avgPrice: 1420,
+    currentPrice: 1367.80,
+    value: 27356,
+    pnl: -1044,
+    pnlPercent: -3.68
   }
 ];
 

@@ -20,13 +20,13 @@ interface PortfolioDataPoint {
 
 const portfolioData: PortfolioDataPoint[] = [
   { date: '2024-01', value: 200000, invested: 200000 },
-  { date: '2024-02', value: 195000, invested: 200000 },
-  { date: '2024-03', value: 188000, invested: 200000 },
-  { date: '2024-04', value: 175000, invested: 200000 },
-  { date: '2024-05', value: 165000, invested: 200000 },
-  { date: '2024-06', value: 158000, invested: 200000 },
-  { date: '2024-07', value: 152000, invested: 200000 },
-  { date: '2024-08', value: 145000, invested: 200000 },
+  { date: '2024-02', value: 205000, invested: 205000 },
+  { date: '2024-03', value: 215000, invested: 210000 },
+  { date: '2024-04', value: 225000, invested: 220000 },
+  { date: '2024-05', value: 235000, invested: 230000 },
+  { date: '2024-06', value: 245000, invested: 240000 },
+  { date: '2024-07', value: 250000, invested: 245000 },
+  { date: '2024-08', value: 253500, invested: 253500 },
 ];
 
 export const PortfolioChart = () => {
@@ -61,9 +61,9 @@ export const PortfolioChart = () => {
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={portfolioData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
               <defs>
-                <linearGradient id="lossGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0}/>
+                <linearGradient id="gainGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="investedGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="hsl(var(--muted-foreground))" stopOpacity={0.2}/>
@@ -96,9 +96,9 @@ export const PortfolioChart = () => {
               <Area 
                 type="monotone" 
                 dataKey="value" 
-                stroke="hsl(var(--destructive))" 
+                stroke="hsl(var(--primary))" 
                 fillOpacity={1}
-                fill="url(#lossGradient)"
+                fill="url(#gainGradient)"
                 strokeWidth={2}
               />
             </AreaChart>
