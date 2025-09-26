@@ -96,14 +96,14 @@ const Auth = () => {
     <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
       <div className="mb-6 flex items-center">
         <IndianRupee className="h-8 w-8 text-primary" />
-        <span className="ml-2 text-2xl font-bold">StockVista</span>
+        <span className="ml-2 text-2xl font-bold">Bull-Bear Dashboard</span>
       </div>
       
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center text-2xl">Welcome to StockVista</CardTitle>
+          <CardTitle className="text-center text-2xl">Welcome to Bull-Bear Dashboard</CardTitle>
           <CardDescription className="text-center">
-            Your personal stock market analysis platform
+            Your intelligent stock market trading platform
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -34,8 +34,8 @@ const Settings = () => {
               <Switch id="news-updates" />
             </div>
             <div className="flex items-center justify-between">
-              <Label htmlFor="portfolio-summary">Portfolio Summary</Label>
-              <Switch id="portfolio-summary" />
+              <Label htmlFor="market-alerts">Market Opening/Closing Alerts</Label>
+              <Switch id="market-alerts" />
             </div>
           </CardContent>
         </Card>

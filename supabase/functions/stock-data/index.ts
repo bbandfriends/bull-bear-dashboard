@@ -71,7 +71,7 @@ serve(async (req) => {
         results.push({
           symbol: symbol,
           error: "Failed to fetch data",
-          message: error.message
+          message: error instanceof Error ? error.message : "Unknown error"
         });
       }
       
@@ -88,7 +88,7 @@ serve(async (req) => {
   } catch (error) {
     console.error("Error in stock-data function:", error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error" }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

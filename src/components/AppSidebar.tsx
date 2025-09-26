@@ -61,7 +61,7 @@ export function AppSidebar() {
         <div className="flex items-center gap-2">
           <IndianRupee className="h-6 w-6 text-primary" />
           {!isCollapsed && (
-            <span className="text-xl font-bold">StockVista</span>
+            <span className="text-xl font-bold">Bull-Bear Dashboard</span>
           )}
         </div>
       </SidebarHeader>
