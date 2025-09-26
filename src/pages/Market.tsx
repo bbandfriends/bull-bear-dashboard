@@ -30,10 +30,9 @@ const getMarketStatus = () => {
 const Market = () => {
   const marketInfo = getMarketStatus();
   const marketData = [
-    { name: 'NIFTY 50', price: '19,542.65', change: '+124.30 (+0.64%)', positive: true },
-    { name: 'SENSEX', price: '65,995.63', change: '+418.74 (+0.64%)', positive: true },
-    { name: 'NIFTY BANK', price: '44,849.85', change: '+789.25 (+1.79%)', positive: true },
-    { name: 'NIFTY IT', price: '29,847.60', change: '-245.80 (-0.82%)', positive: false },
+    { name: 'NIFTY 50', price: '24,809.00', change: '-85.00 (-0.33%)', positive: false },
+    { name: 'SENSEX', price: '80,900.80', change: '-268.00 (-0.35%)', positive: false },
+    { name: 'NIFTY BANK', price: '54,740.70', change: '-247.00 (-0.46%)', positive: false },
   ];
 
   return (
