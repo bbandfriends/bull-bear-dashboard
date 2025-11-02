@@ -17,6 +17,7 @@ import Stocks from "./pages/Stocks";
 import Portfolio from "./pages/Portfolio";
 import Settings from "./pages/Settings";
 import WatchlistPage from "./components/watchlist/WatchlistPage";
+import SipCalculator from "./pages/SipCalculator";
 
 // Create a new QueryClient instance with default options
 const queryClient = new QueryClient({
@@ -56,6 +57,7 @@ const AppRoutes = () => {
       <Route path="/recommendations" element={<ProtectedRoute element={<Recommendations />} />} />
       <Route path="/portfolio" element={<ProtectedRoute element={<Portfolio />} />} />
       <Route path="/watchlist" element={<ProtectedRoute element={<WatchlistPage />} />} />
+      <Route path="/sip-calculator" element={<ProtectedRoute element={<SipCalculator />} />} />
       <Route path="/settings" element={<ProtectedRoute element={<Settings />} />} />
       <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

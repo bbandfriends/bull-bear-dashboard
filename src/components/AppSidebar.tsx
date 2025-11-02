@@ -9,7 +9,8 @@ import {
   ChartColumnStacked, 
   Settings,
   IndianRupee,
-  User
+  User,
+  Calculator
 } from "lucide-react";
 
 import {
@@ -33,6 +34,7 @@ const mainItems = [
   { title: "Stocks", url: "/stocks", icon: ChartLine },
   { title: "Portfolio", url: "/portfolio", icon: ChartPie },
   { title: "Watchlist", url: "/watchlist", icon: ChartColumnStacked },
+  { title: "SIP Calculator", url: "/sip-calculator", icon: Calculator },
   { title: "Recommendations", url: "/recommendations", icon: ThumbsUp },
 ];
 
