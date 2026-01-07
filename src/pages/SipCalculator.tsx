@@ -412,12 +412,28 @@ const SipCalculator = () => {
                   <CardContent>
                     <div className="h-[400px]">
                       <ResponsiveContainer width="100%" height="100%">
-                        <LineChart>
+                        <LineChart data={(() => {
+                          // Merge all plan data into a single dataset
+                          const maxYears = Math.max(...sipPlans.map(p => parseInt(p.duration) || 0));
+                          const mergedData: { year: number; [key: string]: number }[] = [];
+                          
+                          for (let year = 1; year <= maxYears; year++) {
+                            const dataPoint: { year: number; [key: string]: number } = { year };
+                            sipPlans.forEach((plan) => {
+                              if (plan.result) {
+                                const yearData = plan.result.chartData.find(d => d.year === year);
+                                if (yearData) {
+                                  dataPoint[plan.name] = yearData.value;
+                                }
+                              }
+                            });
+                            mergedData.push(dataPoint);
+                          }
+                          return mergedData;
+                        })()}>
                           <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                           <XAxis 
                             dataKey="year"
-                            type="number"
-                            domain={[0, Math.max(...sipPlans.map(p => parseInt(p.duration) || 10))]}
                             label={{ value: 'Years', position: 'insideBottom', offset: -5 }}
                             tick={{ fill: 'hsl(var(--muted-foreground))' }}
                           />
@@ -439,13 +455,13 @@ const SipCalculator = () => {
                             return (
                               <Line
                                 key={plan.id}
-                                data={plan.result.chartData}
                                 type="monotone"
-                                dataKey="value"
+                                dataKey={plan.name}
                                 name={plan.name}
                                 stroke={colors[index]}
                                 strokeWidth={2}
                                 dot={{ fill: colors[index], r: 3 }}
+                                connectNulls
                               />
                             );
                           })}
