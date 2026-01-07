@@ -13,7 +13,7 @@ import React from "react";
 import Recommendations from "./pages/Recommendations";
 import Profile from "./pages/Profile";
 import Market from "./pages/Market";
-import Stocks from "./pages/Stocks";
+import LearningHub from "./pages/LearningHub";
 import Portfolio from "./pages/Portfolio";
 import Settings from "./pages/Settings";
 import WatchlistPage from "./components/watchlist/WatchlistPage";
@@ -53,7 +53,7 @@ const AppRoutes = () => {
       <Route path="/auth" element={<Auth />} />
       <Route path="/" element={<ProtectedRoute element={<Index />} />} />
       <Route path="/market" element={<ProtectedRoute element={<Market />} />} />
-      <Route path="/stocks" element={<ProtectedRoute element={<Stocks />} />} />
+      <Route path="/learning-hub" element={<ProtectedRoute element={<LearningHub />} />} />
       <Route path="/recommendations" element={<ProtectedRoute element={<Recommendations />} />} />
       <Route path="/portfolio" element={<ProtectedRoute element={<Portfolio />} />} />
       <Route path="/watchlist" element={<ProtectedRoute element={<WatchlistPage />} />} />

@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { 
   Home, 
   ChartBarBig, 
-  ChartLine, 
+  BookOpen, 
   ThumbsUp, 
   ChartPie, 
   ChartColumnStacked, 
@@ -31,7 +31,7 @@ import {
 const mainItems = [
   { title: "Dashboard", url: "/", icon: Home },
   { title: "Market Overview", url: "/market", icon: ChartBarBig },
-  { title: "Stocks", url: "/stocks", icon: ChartLine },
+  { title: "Learning Hub", url: "/learning-hub", icon: BookOpen },
   { title: "Portfolio", url: "/portfolio", icon: ChartPie },
   { title: "Watchlist", url: "/watchlist", icon: ChartColumnStacked },
   { title: "SIP Calculator", url: "/sip-calculator", icon: Calculator },
