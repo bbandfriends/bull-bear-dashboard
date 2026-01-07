@@ -26,33 +26,33 @@ export type NewsItem = {
   relatedSymbols: string[];
 };
 
-// Mock data for Indian stocks (Nifty 50)
+// Mock data for Indian stocks (Nifty 50) - Updated from CSV
 const mockStockData: StockData[] = [
   {
     id: "1",
     symbol: "RELIANCE",
     name: "Reliance Industries",
-    price: 1456.40,
-    change: 0.15,
-    changePercent: 0.15,
+    price: 1504.20,
+    change: -3.46,
+    changePercent: -0.23,
     volume: 9036695,
     marketCap: "19.44L Cr",
     high52w: 1608.80,
     low52w: 1114.85,
-    chartData: generateChartData(1456, 200, 20, true)
+    chartData: generateChartData(1504, 200, 20, false)
   },
   {
     id: "2",
     symbol: "HDFCBANK",
     name: "HDFC Bank",
-    price: 1934.70,
-    change: 0.05,
-    changePercent: 0.05,
+    price: 949.05,
+    change: -13.17,
+    changePercent: -1.37,
     volume: 7934005,
     marketCap: "12.56L Cr",
     high52w: 1978.90,
     low52w: 1435.50,
-    chartData: generateChartData(1935, 300, 20, true)
+    chartData: generateChartData(949, 300, 20, false)
   },
   {
     id: "3",
@@ -71,53 +71,53 @@ const mockStockData: StockData[] = [
     id: "4",
     symbol: "BHARTIARTL",
     name: "Bharti Airtel",
-    price: 1814.00,
-    change: -53.20,
-    changePercent: -2.85,
+    price: 2084.20,
+    change: -21.05,
+    changePercent: -1.00,
     volume: 10000000,
     marketCap: "9.32L Cr",
-    high52w: 1917.00,
+    high52w: 2200.00,
     low52w: 1219.05,
-    chartData: generateChartData(1814, 300, 20, false)
+    chartData: generateChartData(2084, 300, 20, false)
   },
   {
     id: "5",
     symbol: "ICICIBANK",
     name: "ICICI Bank",
-    price: 1454.00,
-    change: 3.20,
-    changePercent: 0.22,
+    price: 1427.70,
+    change: 16.50,
+    changePercent: 1.17,
     volume: 6439208,
     marketCap: "7.28L Cr",
     high52w: 1456.50,
     low52w: 1051.05,
-    chartData: generateChartData(1454, 200, 20, true)
+    chartData: generateChartData(1428, 200, 20, true)
   },
   {
     id: "6",
     symbol: "SBIN",
     name: "State Bank of India",
-    price: 792.10,
-    change: -15.68,
-    changePercent: -1.94,
+    price: 1007.15,
+    change: -11.73,
+    changePercent: -1.15,
     volume: 10000000,
     marketCap: "6.02L Cr",
-    high52w: 912.00,
+    high52w: 1100.00,
     low52w: 680.00,
-    chartData: generateChartData(792, 100, 20, false)
+    chartData: generateChartData(1007, 100, 20, false)
   },
   {
     id: "7",
     symbol: "INFY",
     name: "Infosys",
-    price: 1589.90,
-    change: -23.04,
-    changePercent: -1.43,
+    price: 1639.00,
+    change: 26.76,
+    changePercent: 1.66,
     volume: 4576751,
     marketCap: "2.67L Cr",
     high52w: 2006.45,
     low52w: 1307.00,
-    chartData: generateChartData(1590, 200, 20, false)
+    chartData: generateChartData(1639, 200, 20, true)
   },
   {
     id: "8",
@@ -149,27 +149,27 @@ const mockStockData: StockData[] = [
     id: "10",
     symbol: "ITC",
     name: "ITC",
-    price: 435.70,
-    change: 3.03,
-    changePercent: 0.70,
+    price: 341.25,
+    change: -1.20,
+    changePercent: -0.35,
     volume: 10000000,
     marketCap: "1.94L Cr",
     high52w: 499.96,
     low52w: 381.10,
-    chartData: generateChartData(436, 50, 20, true)
+    chartData: generateChartData(341, 50, 20, false)
   },
   {
     id: "11",
     symbol: "LT",
     name: "Larsen & Toubro",
-    price: 3604.70,
-    change: -13.44,
-    changePercent: -0.37,
+    price: 4157.00,
+    change: 16.55,
+    changePercent: 0.40,
     volume: 1278520,
     marketCap: "6.65L Cr",
-    high52w: 3963.50,
+    high52w: 4300.00,
     low52w: 2965.30,
-    chartData: generateChartData(3605, 400, 20, false)
+    chartData: generateChartData(4157, 400, 20, true)
   },
   {
     id: "12",
@@ -227,27 +227,27 @@ const mockStockData: StockData[] = [
     id: "16",
     symbol: "M&M",
     name: "Mahindra & Mahindra",
-    price: 3135.60,
-    change: -8.78,
-    changePercent: -0.28,
+    price: 3748.80,
+    change: -36.68,
+    changePercent: -0.97,
     volume: 2269659,
     marketCap: "3.00L Cr",
-    high52w: 3270.95,
+    high52w: 3900.00,
     low52w: 2286.20,
-    chartData: generateChartData(3136, 300, 20, false)
+    chartData: generateChartData(3749, 300, 20, false)
   },
   {
     id: "17",
     symbol: "AXISBANK",
     name: "Axis Bank",
-    price: 1208.80,
-    change: -0.24,
-    changePercent: -0.02,
+    price: 1295.50,
+    change: 1.68,
+    changePercent: 0.13,
     volume: 4016269,
     marketCap: "6.43L Cr",
-    high52w: 1339.65,
+    high52w: 1400.00,
     low52w: 933.50,
-    chartData: generateChartData(1209, 150, 20, false)
+    chartData: generateChartData(1296, 150, 20, true)
   },
   {
     id: "18",
@@ -305,14 +305,14 @@ const mockStockData: StockData[] = [
     id: "22",
     symbol: "ONGC",
     name: "Oil & Natural Gas Corporation",
-    price: 247.27,
-    change: -0.35,
-    changePercent: -0.14,
+    price: 238.70,
+    change: -3.19,
+    changePercent: -1.32,
     volume: 8030229,
     marketCap: "2.94L Cr",
     high52w: 345.00,
     low52w: 205.00,
-    chartData: generateChartData(247, 40, 20, false)
+    chartData: generateChartData(239, 40, 20, false)
   },
   {
     id: "23",
@@ -344,14 +344,14 @@ const mockStockData: StockData[] = [
     id: "25",
     symbol: "POWERGRID",
     name: "Power Grid Corporation of India",
-    price: 300.20,
-    change: 0.54,
-    changePercent: 0.18,
+    price: 264.95,
+    change: -3.60,
+    changePercent: -1.34,
     volume: 10000000,
     marketCap: "1.36L Cr",
     high52w: 366.25,
     low52w: 247.30,
-    chartData: generateChartData(300, 40, 20, true)
+    chartData: generateChartData(265, 40, 20, false)
   },
   {
     id: "26",
@@ -565,14 +565,14 @@ const mockStockData: StockData[] = [
     id: "42",
     symbol: "TATASTEEL",
     name: "Tata Steel",
-    price: 157.55,
-    change: 0.20,
-    changePercent: 0.13,
+    price: 183.60,
+    change: -2.61,
+    changePercent: -1.40,
     volume: 10000000,
     marketCap: "3.19L Cr",
-    high52w: 184.60,
+    high52w: 200.00,
     low52w: 122.62,
-    chartData: generateChartData(158, 20, 20, true)
+    chartData: generateChartData(184, 20, 20, false)
   },
   {
     id: "43",
